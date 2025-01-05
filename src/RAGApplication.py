@@ -58,31 +58,30 @@ class RAGApplication:
             
         self.data_df['Embeddings'] = _embeddings
 
-    def answer_questions(self, questions: List[str]) -> List[Dict[str, str]]:
+    def answer_questions(self, question: str) -> List[Dict[str, str]]:
         """Answer a list of questions using the processed data"""
         if self.data_df is None:
             raise ValueError("Please process a PDF first using process_pdf()")
             
         answers = []
-        for question in questions:
-            try:
-                passage = self.gemini_client.find_best_passage(question, self.data_df)
-                prompt = self.gemini_client.make_answer_prompt(question, passage)
-                response = self.gemini_client.client.models.generate_content(
-                    model=Config.MODEL_NAME,
-                    contents=prompt
-                )
-                answers.append({
-                    'question': question,
-                    'answer': response.text,
-                    'source': f"Page {passage['page']}\nContent: {passage['content']}"
-                })
-            except Exception as e:
-                st.write(f"Error processing question '{question}': {e}")
-                answers.append({
-                    'question': question,
-                    'answer': f"Error generating answer: {str(e)}",
-                    'source': "Error"
-                })
+        try:
+            passage = self.gemini_client.find_best_passage(question, self.data_df)
+            prompt = self.gemini_client.make_answer_prompt(question, passage)
+            response = self.gemini_client.client.models.generate_content(
+                model=Config.MODEL_NAME,
+                contents=prompt
+            )
+            answers.append({
+                'question': question,
+                'answer': response.text,
+                'source': f"Page {passage['page']}\nContent: {passage['content']}"
+            })
+        except Exception as e:
+            print(f"Error processing question '{question}': {e}")
+            answers.append({
+                'question': question,
+                'answer': f"Error generating answer: {str(e)}",
+                'source': "Error"
+            })
             
         return answers
