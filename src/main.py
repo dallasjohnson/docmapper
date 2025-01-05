@@ -1,6 +1,6 @@
 import os
 from dotenv import load_dotenv
-import RAGApplication
+from RAGApplication import RAGApplication
 from google import genai
 import streamlit as st
 
