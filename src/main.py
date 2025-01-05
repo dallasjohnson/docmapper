@@ -2,7 +2,7 @@ import os
 from dotenv import load_dotenv
 import RAGApplication
 from google import genai
-
+import streamlit as st
 
 def main():
     # Load environment variables
