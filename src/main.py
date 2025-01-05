@@ -22,9 +22,9 @@ def main():
             model="gemini-2.0-flash-exp",
             contents="Hello, this is a test message."
         )
-        print("API key is working!",test_response.text)
+        st.write("API key is working!",test_response.text)
     except Exception as e:
-        print(f"API test failed: {e}")
+        st.write(f"API test failed: {e}")
         raise ValueError("Invalid API key.")
 
     # Form
@@ -52,12 +52,12 @@ def main():
 
             # Display answers
             for result in answers:
-                print(f"Question: {result['question']}")
-                print(f"Answer: {result['answer']}")
-                print(f"Source: {result['source']}")
-                print("-" * 80)
+                st.write(f"Question: {result['question']}")
+                st.write(f"Answer: {result['answer']}")
+                st.write(f"Source: {result['source']}")
+                st.write("-" * 80)
         except Exception as e:
-            print(f"An error occurred: {e}")
+            st.write(f"An error occurred: {e}")
 
 if __name__ == "__main__":
     main()

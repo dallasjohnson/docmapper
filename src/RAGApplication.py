@@ -6,8 +6,7 @@ import tqdm
 import GeminiClient
 import PDFProcessor
 from config import Config
-
-
+import streamlit as st
 class RAGApplication:
     def __init__(self, api_key: str):
         self.gemini_client = GeminiClient(api_key)
@@ -25,7 +24,7 @@ class RAGApplication:
         page_contents = []
         page_analyses = []
 
-        print("Analyzing PDF pages...")
+        st.write("Analyzing PDF pages...")
         for i, image in enumerate(images):
             content = self.gemini_client.annotate_image(image)
             if content:
@@ -44,14 +43,14 @@ class RAGApplication:
             })
         
         # Generate embeddings
-        print("\nGenerating embeddings...")
+        st.write("\nGenerating embeddings...")
         embeddings = []
 
         try:
             for text in tqdm(self.data_df['Analysis']):
                 embeddings.append(self.gemini_client.embed_text(text))
         except Exception as e:
-            print(f"Error generating embeddings: {e}")
+            st.write(f"Error generating embeddings: {e}")
             time.sleep(10)
         
         _embeddings = []
@@ -80,7 +79,7 @@ class RAGApplication:
                     'source': f"Page {passage['page']}\nContent: {passage['content']}"
                 })
             except Exception as e:
-                print(f"Error processing question '{question}': {e}")
+                st.write(f"Error processing question '{question}': {e}")
                 answers.append({
                     'question': question,
                     'answer': f"Error generating answer: {str(e)}",

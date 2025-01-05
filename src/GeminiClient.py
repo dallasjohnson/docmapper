@@ -7,6 +7,7 @@ from ratelimit import sleep_and_retry, limits
 from config import Config
 from PIL import Image
 from google import genai
+import streamlit as st
 
 class GeminiClient:
     """Client for Gemini API"""
@@ -47,7 +48,7 @@ class GeminiClient:
             )
             return response.text if response.text else ""
         except Exception as e:
-            print(f"Error analyzing page: {e}")
+            st.write(f"Error analyzing page: {e}")
             return ""
     
     @sleep_and_retry
@@ -87,7 +88,7 @@ class GeminiClient:
             }
 
         except Exception as e:
-            print(f"Error finding best passage: {e}")
+            st.write(f"Error finding best passage: {e}")
             return ""
 
     def make_answer_prompt(self, query: str, passage: dict) -> str:
