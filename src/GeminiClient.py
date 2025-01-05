@@ -1,6 +1,6 @@
 import textwrap
 import time
-import types
+from google.genai import types
 import numpy as np
 import pandas as pd
 from ratelimit import sleep_and_retry, limits
