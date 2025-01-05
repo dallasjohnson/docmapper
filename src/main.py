@@ -40,11 +40,12 @@ def main():
             with open(temp_pdf_path, "wb") as f:
                 f.write(pdf_path.getbuffer())
             
+            st.write(f"preparing to process PDF: {pdf_path.name}")
             # Initialize application
             app = RAGApplication(api_key)
             
             # Process PDF and answer questions
-            print(f"Processing PDF: {pdf_path.name}")
+            st.write(f"Processing PDF: {pdf_path.name}")
             with st.spinner("Thinking..."):
                 app.process_pdf(temp_pdf_path)
                 answers = app.answer_questions(questions)
