@@ -18,7 +18,7 @@ class RAGApplication:
             raise FileNotFoundError(f"File not found: {pdf_path}")
         
         # Convert PDF pages to images
-        images = PDFProcessor.process_pdf(pdf_path)
+        images = PDFProcessor.pdf_to_images(pdf_path)
 
         # Analyze each page
         page_contents = []
