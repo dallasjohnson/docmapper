@@ -48,7 +48,7 @@ class RAGApplication:
 
         try:
             for text in tqdm(self.data_df['Analysis']):
-                embeddings.append(self.gemini_client.embed_text(text))
+                embeddings.append(self.gemini_client.create_embeddings(text))
         except Exception as e:
             st.write(f"Error generating embeddings: {e}")
             time.sleep(10)
