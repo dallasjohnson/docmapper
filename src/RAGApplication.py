@@ -45,19 +45,18 @@ class RAGApplication:
         # Generate embeddings
         st.write("\nGenerating embeddings...")
         embeddings = []
-
         try:
             for text in tqdm(self.data_df['Analysis']):
                 embeddings.append(self.gemini_client.create_embeddings(text))
         except Exception as e:
-            st.write(f"Error generating embeddings: {e}")
+            print(f"Error generating embeddings: {e}")
             time.sleep(10)
-        
+            
         _embeddings = []
         for embedding in embeddings:
             _embeddings.append(embedding.embeddings[0].values)
-
-        self.data_df['Embeddings'] = embeddings
+            
+        self.data_df['Embeddings'] = _embeddings
 
     def answer_questions(self, questions: List[str]) -> List[Dict[str, str]]:
         """Answer a list of questions using the processed data"""
