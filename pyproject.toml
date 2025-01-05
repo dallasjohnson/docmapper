@@ -1,0 +1,20 @@
+[project]
+name = "llm-agent-app"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "dataclasses>=0.8",
+    "google-genai>=0.3.0",
+    "google>=3.0.0",
+    "numpy>=2.2.1",
+    "pandas>=2.2.3",
+    "pillow>=11.1.0",
+    "python-dotenv>=1.0.1",
+    "ratelimit>=2.2.1",
+    "tqdm>=4.67.1",
+    "typing>=3.10.0.0",
+    "pymupdf>=1.25.1",
+]
+
