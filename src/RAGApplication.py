@@ -26,7 +26,7 @@ class RAGApplication:
 
         st.write("Analyzing PDF pages...")
         for i, image in enumerate(images):
-            content = self.gemini_client.annotate_image(image)
+            content = self.gemini_client.analyze_page(image)
             if content:
                 page_contents.append({
                     'page_number': i+1,
