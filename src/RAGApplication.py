@@ -3,8 +3,8 @@ import time
 from typing import Dict, List
 import pandas as pd
 import tqdm
-import GeminiClient
-import PDFProcessor
+from GeminiClient import GeminiClient
+from PDFProcessor import PDFProcessor
 from config import Config
 import streamlit as st
 class RAGApplication:
