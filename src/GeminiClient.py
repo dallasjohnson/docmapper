@@ -73,15 +73,11 @@ class GeminiClient:
                 contents=query,
                 config=types.EmbedContentConfig(task_type="RETRIEVAL_QUERY")
             )
-
-            dot_product_scores = np.dot(
-                np.stack(dataframe['Embeddings']),
-                query_embedding.embeddings[0].values
-            )
-
-            idx = np.argmax(dot_product_scores)
+            
+            dot_products = np.dot(np.stack(dataframe['Embeddings']), 
+                                query_embedding.embeddings[0].values)
+            idx = np.argmax(dot_products)
             content = dataframe.iloc[idx]['Original Content']
-
             return {
                 'page': content['page_number'],
                 'content': content['content']
