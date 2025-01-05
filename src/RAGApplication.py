@@ -2,7 +2,7 @@ import os
 import time
 from typing import Dict, List
 import pandas as pd
-import tqdm
+from tqdm import tqdm
 from GeminiClient import GeminiClient
 from PDFProcessor import PDFProcessor
 from config import Config
